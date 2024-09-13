@@ -32,3 +32,32 @@ class Solution {
         }
     }
 }
+
+/*
+// Optimal Approach
+
+// we will reverse the array for i---k-1 then from k to n-1 then whole reverse
+
+// below one is little time complex but it dont takes extra space;
+
+class Solution{
+    public void reverse(int[] arr, int st, int end){
+        int i = st; int j = end;
+        while(st< end){
+            int temp = arr[st];
+            arr[st] = arr[end];
+            arr[end] = temp;
+            st++;
+            end--;
+        }
+    }
+    public void rotate(int[] arr, int k){
+        int n = arr.length;
+        k = k%n;
+        if(arr.length == 1 || k== 0) return;
+        reverse(arr,0,n-1);
+        reverse(arr,0,k-1);
+        reverse(arr,k,n-1);
+    }
+}
+*/
