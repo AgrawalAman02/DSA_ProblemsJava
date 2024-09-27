@@ -23,5 +23,21 @@ public class Solution {
             }
         }
         return false;
+
+
+        // using two pointer approach 
+        // O(1) space complexity
+
+        ListNode slow = head;
+        ListNode fast =head;
+
+        while(fast!=null && fast.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+
+            if(slow == fast ) return true;
+        }
+
+        return false;
     }
 }
