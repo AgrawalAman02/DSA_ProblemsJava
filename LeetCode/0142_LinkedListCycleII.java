@@ -23,5 +23,31 @@ public class Solution {
             }
         }
         return null;
+
+        // optimised using the two ptr approach so that space comp = O(1)
+
+        ListNode slow = head;
+        ListNode fast =head;
+
+        while(fast!=null && fast.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+
+            if(slow == fast ){
+                slow = head;
+                while(slow!=fast){
+                    fast  = fast.next;
+                    slow = slow.next;
+                }
+                return slow;
+
+            }
+        }
+
+        
+        return null;
+
+
+        
     }
 }
