@@ -1,50 +1,51 @@
-static int cnt;
+import java.util.*;
+public class Solution {
+    static int cnt = 0;
 
-    public static void merge(int[] arr, int lo, int mid, int hi) {
-        int i = lo, j = mid + 1;
+    public static void merge(int[] arr, int lo, int mid, int hi){
+        
+        int i = lo, j =mid +1;
         List<Integer> temp = new ArrayList<>();
+        
 
-        // Merging two sorted halves and counting inversions
-        while (i <= mid && j <= hi) {
-            if (arr[i] <= arr[j]) {  // Use <= to avoid unnecessary inversions
+        while(i<=mid && j<=hi){
+            if(arr[i]<=arr[j]){
                 temp.add(arr[i]);
                 i++;
-            } else {
+            }
+            else{
                 temp.add(arr[j]);
-                cnt += (mid - i + 1);  // Count inversions
+                cnt+=mid-i +1;
                 j++;
             }
         }
-
-        // Copy remaining elements from the left half (if any)
-        while (i <= mid) {
+        while(i<= mid){
             temp.add(arr[i]);
             i++;
         }
-
-        // Copy remaining elements from the right half (if any)
-        while (j <= hi) {
+        while(j<= hi){
             temp.add(arr[j]);
             j++;
         }
 
-        // Copy sorted elements back into the original array
-        for (i = lo; i <= hi; i++) {
-            arr[i] = temp.get(i - lo);
+        for( i = lo; i<=hi;i++){
+            arr[i] = temp.get(i-lo);
+        }
+
+    }
+
+    public static void mergeSort(int[] arr, int lo, int hi){
+        if(lo>=hi) return;
+        else{
+            int mid = lo + (hi-lo)/2;
+            mergeSort(arr, lo, mid);
+            mergeSort(arr, mid+1, hi);
+            merge(arr,lo,mid,hi);
         }
     }
-
-    public static void mergeSort(int[] arr, int lo, int hi) {
-        if (lo >= hi) return;
-
-        int mid = lo + (hi - lo) / 2;
-        mergeSort(arr, lo, mid);
-        mergeSort(arr, mid + 1, hi);
-        merge(arr, lo, mid, hi);
-    }
-
-    public static int numberOfInversions(int[] a, int n) {
-        cnt = 0;  // Reset inversion count before each calculation
-        mergeSort(a, 0, n - 1);
+    public static int numberOfInversions(int []a, int n) {
+        // Write your code here.
+        mergeSort(a,0,n-1);
         return cnt;
     }
+}
